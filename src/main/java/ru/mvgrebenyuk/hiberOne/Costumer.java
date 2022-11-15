@@ -22,7 +22,7 @@ public class Costumer {
                 '}';
     }
 
-   @OneToMany(mappedBy = "costumer")
+   @OneToMany(mappedBy = "costumer", fetch = FetchType.EAGER)
    private List<Product> products;
 
     public String getName_cust() {

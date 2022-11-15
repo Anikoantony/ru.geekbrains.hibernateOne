@@ -21,11 +21,15 @@ public class Main {
             System.out.println(costumerDaoImplements.findByNane("Jack"));
             // вытащить продукт у клиента через Dao клиент
             System.out.println(costumerDaoImplements.returnProductById(0,1L));
+
+            //Вытащить List продуктаов по клиент:
+            List<Product> products=costumerDaoImplements.returnProductsById(1L);
+            System.out.println("Продукты "+products.get(2).getTitle());
+
             //вытащить клиента по продукту через DAO продукта
             System.out.println(productDaoImplement.findCostumerById(1L));
 
-            /*List<Product> products=new CostumerDaoImplements(sessionFactoryUtils).returnProductsById(1L);
-            System.out.println("Продукты "+products.get(2).getTitle());*/
+
 
            // System.out.println(costumerDaoImplements.returnProductsById(1L));
             } catch (Exception e) {
