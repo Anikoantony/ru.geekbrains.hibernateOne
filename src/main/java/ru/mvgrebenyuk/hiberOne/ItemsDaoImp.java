@@ -1,8 +1,10 @@
 package ru.mvgrebenyuk.hiberOne;
 
+import org.apache.tapestry5.annotations.Component;
 import org.hibernate.Session;
 
 import java.util.List;
+
 
 public class ItemsDaoImp implements ItemsDao {
 

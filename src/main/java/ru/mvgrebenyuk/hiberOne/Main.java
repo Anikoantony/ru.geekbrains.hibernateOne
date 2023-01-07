@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import javax.sound.midi.Soundbank;
 import java.util.List;
 
+
 public class Main {
 
     private static SessionFactory factory;
@@ -15,23 +16,34 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+// 2. Для обеих сущностей создаете Dao классы. Работу с SessionFactory выносите во вспомогательный класс;
         SessionFactoryUtils sessionFactoryUtils = new SessionFactoryUtils();
         sessionFactoryUtils.init();
         try {
           /*
-            1. Создайте сущность Product (Long id, String title, int price) и таблицу
-          в базе данных для хранения объектов этой сущности;
-            2. Создайте класс ProductDao и реализуйте в нем логику выполнения
-            CRUD-операций над сущностью Product (Product findById(Long id), List<Product> findAll(),
-            void deleteById(Long id), Product saveOrUpdate(Product product));
-*/
-            ProductDao productDao = new ProductDaoImplement(sessionFactoryUtils);
+            1. В базе данных необходимо реализовать возможность хранить информацию о покупателях (id, имя) и товарах (id, название, стоимость). У каждого покупателя свой набор купленных товаров;
+            2. Для обеих сущностей создаете Dao классы. Работу с SessionFactory выносите во вспомогательный класс;
+            3. * Создаете сервис, позволяющий по id покупателя узнать список купленных им товаров, и по id товара узнавать список покупателей этого товара;
+           */
+            CostumerDao costumerDao= new CostumerDao(sessionFactoryUtils);
 
-            // findById(Long id)
+
+            // * Создаете сервис, позволяющий по id покупателя узнать список купленных им товаров,
+
+           Costumer costumer=costumerDao.findById(1L);
+           System.out.println("Поиск по Id покупателя " + costumer);
+
+           // -------------------------- findById(Long id)
+           //  и по id товара узнавать список покупателей этого товара;
+
+            costumerDao.byIdCostumerFindProduct(1L); //
+            ProductDaoImplement productDao = new ProductDaoImplement(sessionFactoryUtils);
+            productDao.byIdProductFindCostumer(1L);
+
+
+            /*
             Product product = productDao.findById(1L);
             System.out.println(product);
-
             // findAll()
             productDao.findAll();
 
@@ -43,7 +55,7 @@ public class Main {
             productDao.saveOrUpdate(new Product("BAG",1800));
             productDao.findAll();
 
-            /* ItemsDao itemsDao = new ItemsDaoImp(sessionFactoryUtils);
+            ItemsDao itemsDao = new ItemsDaoImp(sessionFactoryUtils);
 
             Items item = itemsDao.findByid(1L);
             System.out.println("Класс ITEMS " + item.toString());

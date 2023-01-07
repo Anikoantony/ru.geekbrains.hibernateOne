@@ -2,6 +2,7 @@ package ru.mvgrebenyuk.hiberOne;
 
 import org.hibernate.Session;
 
+import javax.sound.midi.Soundbank;
 import java.util.List;
 
 public class ProductDaoImplement implements ProductDao{
@@ -21,6 +22,31 @@ public class ProductDaoImplement implements ProductDao{
             return product;
         }
     }
+
+  //  и по id товара узнавать список покупателей этого товара;
+       public void byIdProductFindCostumer(Long id)
+       {
+           try {
+               Session session = sessionFactoryUtils.getSession();
+               session.beginTransaction();
+              // Costumer costumer = session.get(Costumer.class,id);
+               Product product = (Product) session
+                       .createQuery("select p from Product p where p.id=:id")
+                       .setParameter("id",id)
+                       .getSingleResult();
+               System.out.println("Продукт по Id ");
+               System.out.println(product);
+
+               Costumer costumer=product.getCostumer();
+               System.out.println("И его покупатель:");
+               System.out.println(costumer);
+               session.getTransaction().commit();
+
+           } catch (Exception e) {
+               throw new RuntimeException(e);
+           }
+
+       }
 
    /* public User findById(Long id) {
         try (Session session = sessionFactoryUtils.getSession()){

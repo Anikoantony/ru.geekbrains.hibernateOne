@@ -13,8 +13,8 @@
         <property name="show_sql">true</property>
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
-        <mapping class="ru.mvgrebenyuk.hiberOne.User"/>
         <mapping class="ru.mvgrebenyuk.hiberOne.Product"/>
         <mapping class="ru.mvgrebenyuk.hiberOne.Items"/>
-    </session-factory>
+        <mapping class="ru.mvgrebenyuk.hiberOne.Costumer"/>
+       </session-factory>
 </hibernate-configuration>

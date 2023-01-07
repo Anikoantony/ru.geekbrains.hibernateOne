@@ -12,13 +12,27 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name="Id")
     private Long id;
+    // в случае исключения @Transient
     @Column(name = "title")
     private String title;
 
     @Column(name="price")
     private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "costumers_id")
+    private Costumer costumer;
+
+    public void setCostumer(Costumer costumer) {
+        this.costumer = costumer;
+    }
+
+    public Costumer getCostumer() {
+        return costumer;
+    }
 
     public Long getId() {
         return id;
